@@ -1,0 +1,88 @@
+# Your snippets
+#
+# Atom snippets allow you to enter a simple prefix in the editor and hit tab to
+# expand the prefix into a larger code block with templated values.
+#
+# You can create a new snippet in this file by typing "snip" and then hitting
+# tab.
+#
+# An example CoffeeScript snippet to expand log to console.log:
+#
+# '.source.coffee':
+#   'Console log':
+#     'prefix': 'log'
+#     'body': 'console.log $1'
+#
+# Each scope (e.g. '.source.coffee' above) can only be declared once.
+#
+# This file uses CoffeeScript Object Notation (CSON).
+# If you are unfamiliar with CSON, you can read more about it in the
+# Atom Flight Manual:
+# https://atom.io/docs/latest/using-atom-basic-customization#cson
+'.source.jsx, .source.js':
+  'Comment Divider':
+    'prefix': 'commdiv'
+    'body': '/*---------------------------- $1 ----------------------------*/'
+  'Import':
+    'prefix': 'imp'
+    'body': 'import $1 from \'$2\';'
+  'Import React':
+    'prefix': 'impr'
+    'body': 'import React from \'react\';'
+  'Import connect':
+    'prefix': 'impc'
+    'body': 'import { connect } from \'react-redux\';'
+  'Import destructured':
+    'prefix': 'impd'
+    'body': 'import { $1 } from \'$2\';'
+  'Stateless prop default exported':
+    'prefix': 'sta'
+    'body': """
+      export default (props) => (
+        ${1:<div>Hello World</div>}
+      );
+    """
+  'Basic Reducer':
+    'prefix': 'red'
+    'body': """
+      export default (state = ${1:0}, action) => {
+        switch (action.${2:type}) {
+          case '${3:INCREMENT}':
+            return ${4: state + 1};
+          case '${5: DECREMENT}':
+            return ${6: state - 1};
+          $7
+          default:
+            return state;
+        }
+      };
+    """
+  'Arrow Function Multi Line':
+    'prefix': 'arrow',
+    'body': """
+      ($1) => {
+        $2
+      };
+    """
+  'Arrow Function Single Line':
+    'prefix': 'sarrow',
+    'body': '$1 => $2;'
+  'Map State to props':
+    'prefix': 'mstp',
+    'body': """
+      const mapStateToProps = (state) => {
+        $1
+      };
+    """
+  'Map Dispatch to props':
+    'prefix': 'mdtp',
+    'body': """
+      const mapDispatchToProps = (dispatch) => ({
+        $1
+      });
+    """
+  'Redux Connect':
+    'prefix': 'rconn',
+    'body': """
+      connect(${1:mapStateToProps}, ${2:mapDispatchToProps})($3);
+    """
