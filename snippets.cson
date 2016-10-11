@@ -70,9 +70,9 @@
   'Map State to props':
     'prefix': 'mstp',
     'body': """
-      const mapStateToProps = (state) => {
+      const mapStateToProps = (state) => ({
         $1
-      };
+      });
     """
   'Map Dispatch to props':
     'prefix': 'mdtp',
