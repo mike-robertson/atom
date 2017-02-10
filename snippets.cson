@@ -35,6 +35,12 @@
   'Import destructured':
     'prefix': 'impd'
     'body': 'import { $1 } from \'$2\';'
+  'Variable const':
+    'prefix': 'const'
+    'body': 'const $1 = $2;'
+  'Variable destructured':
+    'prefix': 'cond'
+    'body': 'const { $1 } = $2;'
   'Stateless prop default exported':
     'prefix': 'sta'
     'body': """
@@ -67,17 +73,82 @@
   'Arrow Function Single Line':
     'prefix': 'sarrow',
     'body': '$1 => $2;'
+  'Arrow Function React':
+    'prefix': 'rarrow',
+    'body': """
+      ($1) => (
+        $2
+      );
+    """
+  'Import React Component':
+    'prefix': 'imprc'
+    'body': 'import $1 from \'components/$1\';'
+  'React Solo Component Stateless':
+    'prefix': 'rcomp',
+    'body': """
+      import React, { PropTypes } from 'react';
+      import styles from './$1.css';
+
+      const $1 = ($2) => (
+        <div className={styles.container}>
+          $3
+        </div>
+      );
+
+      $1.propTypes = {
+
+      };
+
+      export default $1;
+    """
+  'React Stateful Component with dressings':
+    'prefix': 'rscomp',
+    'body': """
+      import React, { Component, PropTypes } from 'react';
+      import styles from './$1.css';
+
+      class $1 extends Component {
+        constructor() {
+
+        }
+
+        render() {
+          return (
+            <div className={styles.container}>
+              $3
+            </div>
+          );
+        }
+      }
+
+      $1.propTypes = {
+
+      };
+
+      export default $1;
+    """
+  'React Component Stateless':
+    'prefix': 'comp',
+    'body': """
+      const $1 = ($2) => (
+        $3
+      );
+
+      $1.propTypes = {
+
+      };
+    """
   'Map State to props':
     'prefix': 'mstp',
     'body': """
-      const mapStateToProps = (state) => ({
+      const mapStateToProps = state => ({
         $1
       });
     """
   'Map Dispatch to props':
     'prefix': 'mdtp',
     'body': """
-      const mapDispatchToProps = (dispatch) => ({
+      const mapDispatchToProps = dispatch => ({
         $1
       });
     """
