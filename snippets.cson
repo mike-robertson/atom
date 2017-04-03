@@ -87,16 +87,19 @@
     'prefix': 'rcomp',
     'body': """
       import React, { PropTypes } from 'react';
-      import styles from './$1.css';
+      import classnames from 'classnames';
 
-      const $1 = ($2) => (
-        <div className={styles.container}>
+      const $1 = ({
+        className,
+        $2
+      }) => (
+        <div className={classnames(classes.container, className)}>
           $3
         </div>
       );
 
       $1.propTypes = {
-
+        className: PropTypes.string,
       };
 
       export default $1;
@@ -105,7 +108,7 @@
     'prefix': 'rscomp',
     'body': """
       import React, { Component, PropTypes } from 'react';
-      import styles from './$1.css';
+      import classnames from 'classnames';
 
       class $1 extends Component {
         constructor() {
@@ -113,8 +116,13 @@
         }
 
         render() {
+          const {
+            className,
+            $2
+          } = this.props;
+
           return (
-            <div className={styles.container}>
+            <div className={classnames(classes.container, className)}>
               $3
             </div>
           );
@@ -122,8 +130,83 @@
       }
 
       $1.propTypes = {
-
+        className: PropTypes.string,
       };
+
+      export default $1;
+    """
+  'JSS React Solo Component Stateless':
+    'prefix': 'jrcomp',
+    'body': """
+      import React, { PropTypes } from 'react';
+      import classnames from 'classnames';
+      import injectSheet from 'react-jss';
+
+      const ComponentDefinition = ({
+        classes,
+        className,
+        $2
+      }) => (
+        <div className={classnames(classes.container, className)}>
+          $3
+        </div>
+      );
+
+      $1.propTypes = {
+        className: PropTypes.string,
+      };
+
+      ComponentDefinition.propTypes = {
+        classes: PropTypes.object,
+        ...$1.propTypes,
+      };
+
+      const styles = {};
+
+      const $1 = injectSheet(styles)(ComponentDefinition);
+
+      export default $1;
+    """
+  'JSS React Stateful Component with dressings':
+    'prefix': 'jrscomp',
+    'body': """
+      import React, { Component, PropTypes } from 'react';
+      import classnames from 'classnames';
+      import injectSheet from 'react-jss';
+
+      class ComponentDefinition extends Component {
+        constructor() {
+
+        }
+
+        render() {
+          const {
+            classes,
+            className,
+            $2
+          } = this.props;
+
+          return (
+            <div className={classnames(classes.container, className)}>
+              $3
+            </div>
+          );
+        }
+      }
+
+      $1.propTypes = {
+        className: PropTypes.string,
+      };
+
+      ComponentDefinition.propTypes = {
+        classes: PropTypes.object,
+        ...$1.propTypes,
+      };
+
+      const styles = {};
+
+      const $1 = injectSheet(styles)($1);
+
 
       export default $1;
     """
